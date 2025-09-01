@@ -2,20 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('container');
   const registro = document.getElementById('register');
   const login = document.getElementById('login');
-
   registro.addEventListener('click', () => container.classList.add('active'));
   login.addEventListener('click', () => container.classList.remove('active'));
-
   const USERS_KEY = 'consultorio.users';
   const SESSION_KEY = 'consultorio.session';
-
   function safeGet(key){ try { return localStorage.getItem(key); } catch { return null; } }
   function safeSet(key, val){ try { localStorage.setItem(key, val); } catch {} }
   function getUsers(){ return JSON.parse(safeGet(USERS_KEY) || '[]'); }
   function saveUsers(list){ safeSet(USERS_KEY, JSON.stringify(list)); }
   function setSession(email){ safeSet(SESSION_KEY, JSON.stringify({ email })); }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   document.querySelector('.sign-up form').addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('signup-name').value.trim();
@@ -45,10 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setSession(email);
     window.location.href = 'index2.html';
   });
-
   document.querySelector('.sign-in form').addEventListener('submit', (e) => {
     e.preventDefault();
-
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value.trim();
     if (!email || !password) {
@@ -65,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Email ou senha incorretos!');
     }
   });
-  
   document.querySelectorAll('.social-icons button').forEach((button) => {
     button.addEventListener('click', () => {
       if (button.classList.contains('google')) {
